@@ -7,8 +7,8 @@
  * which may be found at http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-var assert = require('assert');
-var ukPostcode = require('../lib/ukPostcode.js');
+import * as assert from "node:assert";
+import * as ukPostcode from "../lib/ukPostcode";
 
 // Valid complete postcodes
 [
@@ -22,7 +22,7 @@ var ukPostcode = require('../lib/ukPostcode.js');
   "BX1 1LT", "BX11LT", // Non-geographic - Lloyds Banking Group
   "GIR 0AA", "GIR0AA" // Non-geographic - Santander
 ].forEach(function(value) {
-  var postcode = ukPostcode.fromString(value);
+  const postcode = ukPostcode.fromString(value);
   assert.ok(postcode.isValid(), "Valid postcode " + value + " was invalid");
   assert.ok(postcode.isComplete(), "Complete postcode " + value + " was incomplete");
 });
@@ -37,7 +37,7 @@ var ukPostcode = require('../lib/ukPostcode.js');
   "EC1A",
   "BX1"
 ].forEach(function(value) {
-  var postcode = ukPostcode.fromString(value);
+  const postcode = ukPostcode.fromString(value);
   assert.ok(postcode.isValid(), "Valid postcode " + value + " was invalid");
   assert.ok(postcode.isPartial(), "Partial postcode " + value + " was complete");
 });
@@ -55,6 +55,6 @@ var ukPostcode = require('../lib/ukPostcode.js');
   "BFPO 1234", // British Forces Post Office
   "GIR" // Partial non-geographic - Santander
 ].forEach(function(value) {
-  var postcode = ukPostcode.fromString(value);
+  const postcode = ukPostcode.fromString(value);
   assert.ok(!postcode.isValid(), "Invalid postcode " + value + " was valid");
 });

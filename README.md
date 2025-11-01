@@ -8,8 +8,8 @@ Node.js module for parsing and validating UK postcodes.
 
 ## Usage
 
-    var ukPostcode = require("uk-postcode");
-    var postcode = ukPostcode.fromString("M11AA");
+    import { fromString } from "uk-postcode";
+    const postcode = fromString("M11AA");
     if (postcode.isValid()) {
       console.log(postcode);         // M1 1AA
       console.log(postcode.outward); // M1

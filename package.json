@@ -1,7 +1,10 @@
 {
   "name": "uk-postcode",
-  "version": "0.1.1",
-  "main": "./lib/ukPostcode",
+  "version": "0.2.0",
+  "type": "module",
+  "main": "dist/ukPostcode.js",
+  "module": "dist/ukPostcode.js",
+  "types": "dist/ukPostcode.d.ts",
   "description": "Parse and validate UK postcodes",
   "repository": {
     "type": "git",
@@ -14,7 +17,8 @@
     "lib"
   ],
   "scripts": {
-    "test": "node test/all"
+    "build": "tsup",
+    "test": "tsx test/all.ts"
   },
   "keywords": [
     "uk",
@@ -22,6 +26,12 @@
     "validation",
     "geo"
   ],
+  "devDependencies": {
+    "@types/node": "^24.9.2",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
   "author": "Lovell Fuller",
   "license": "Apache-2.0"
 }
