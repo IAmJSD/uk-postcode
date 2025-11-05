@@ -11,7 +11,7 @@
     "url": "git://github.com/lovell/uk-postcode.git"
   },
   "engines": {
-    "node": ">=0.8"
+    "node": ">=20"
   },
   "files": [
     "lib"

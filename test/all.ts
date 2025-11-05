@@ -22,9 +22,27 @@ import * as ukPostcode from "../lib/ukPostcode";
   "BX1 1LT", "BX11LT", // Non-geographic - Lloyds Banking Group
   "GIR 0AA", "GIR0AA" // Non-geographic - Santander
 ].forEach(function(value) {
-  const postcode = ukPostcode.fromString(value);
+  // Try the fromString helper function.
+  let postcode = ukPostcode.fromString(value);
   assert.ok(postcode.isValid(), "Valid postcode " + value + " was invalid");
   assert.ok(postcode.isComplete(), "Complete postcode " + value + " was incomplete");
+
+  // Try the unvalidatedFromString function directly.
+  postcode = ukPostcode.Postcode.unvalidatedFromString(value);
+  assert.ok(postcode.isValid(), "Valid postcode " + value + " was invalid");
+  assert.ok(postcode.isComplete(), "Complete postcode " + value + " was incomplete");
+
+  // Try the fromOutward function.
+  try {
+    ukPostcode.Postcode.fromOutward(value);
+    assert.fail("fromOutward did not throw for complete postcode " + value);
+  } catch (e) {
+    assert.ok(e instanceof ukPostcode.PostcodeError, "fromOutward threw wrong error for complete postcode " + value);
+  }
+
+  // Try fromComplete/fromString on the class methods.
+  ukPostcode.Postcode.fromComplete(value);
+  ukPostcode.Postcode.fromString(value);
 });
 
 // Valid partial postcodes
@@ -37,9 +55,35 @@ import * as ukPostcode from "../lib/ukPostcode";
   "EC1A",
   "BX1"
 ].forEach(function(value) {
-  const postcode = ukPostcode.fromString(value);
+  // Try the fromString helper function.
+  let postcode = ukPostcode.fromString(value);
   assert.ok(postcode.isValid(), "Valid postcode " + value + " was invalid");
   assert.ok(postcode.isPartial(), "Partial postcode " + value + " was complete");
+
+  // Try the unvalidatedFromString function directly.
+  postcode = ukPostcode.Postcode.unvalidatedFromString(value);
+  assert.ok(postcode.isValid(), "Valid postcode " + value + " was invalid");
+  assert.ok(postcode.isPartial(), "Partial postcode " + value + " was complete");
+
+  // Try the fromOutward function.
+  postcode = ukPostcode.Postcode.fromOutward(value);
+  assert.ok(postcode.isValid(), "Valid postcode " + value + " was invalid");
+  assert.ok(postcode.isPartial(), "Partial postcode " + value + " was complete");
+
+  // Try fromComplete on the class method.
+  try {
+    ukPostcode.Postcode.fromComplete(value);
+    assert.fail("fromComplete did not throw for partial postcode " + value);
+  } catch (e) {
+    assert.ok(e instanceof ukPostcode.PostcodeError, "fromComplete threw wrong error for partial postcode " + value);
+  }
+
+  // Try fromString on the class method.
+  try {
+    ukPostcode.Postcode.fromString(value);
+  } catch {
+    assert.fail("fromString threw for partial postcode " + value);
+  }
 });
 
 // Invalid postcodes
@@ -55,6 +99,35 @@ import * as ukPostcode from "../lib/ukPostcode";
   "BFPO 1234", // British Forces Post Office
   "GIR" // Partial non-geographic - Santander
 ].forEach(function(value) {
-  const postcode = ukPostcode.fromString(value);
+  // Try the fromString helper function.
+  let postcode = ukPostcode.fromString(value);
   assert.ok(!postcode.isValid(), "Invalid postcode " + value + " was valid");
+
+  // Try the unvalidatedFromString function directly.
+  postcode = ukPostcode.Postcode.unvalidatedFromString(value);
+  assert.ok(!postcode.isValid(), "Invalid postcode " + value + " was valid");
+
+  // Try the fromOutward function.
+  try {
+    ukPostcode.Postcode.fromOutward(value);
+    assert.fail("fromOutward did not throw for invalid postcode " + value);
+  } catch (e) {
+    assert.ok(e instanceof ukPostcode.PostcodeError, "fromOutward threw wrong error for invalid postcode " + value);
+  }
+
+  // Try fromComplete on the class method.
+  try {
+    ukPostcode.Postcode.fromComplete(value);
+    assert.fail("fromComplete did not throw for invalid postcode " + value);
+  } catch (e) {
+    assert.ok(e instanceof ukPostcode.PostcodeError, "fromComplete threw wrong error for invalid postcode " + value);
+  }
+
+  // Try fromString on the class method.
+  try {
+    ukPostcode.Postcode.fromString(value);
+    assert.fail("fromString did not throw for invalid postcode " + value);
+  } catch (e) {
+    assert.ok(e instanceof ukPostcode.PostcodeError, "fromString threw wrong error for invalid postcode " + value);
+  }
 });
