@@ -16,19 +16,14 @@ Node.js module for parsing and validating UK postcodes.
       console.log(postcode.inward);  // 1AA
     }
 
-## Testing [![Build Status](https://travis-ci.org/lovell/uk-postcode.png?branch=master)](https://travis-ci.org/lovell/uk-postcode)
-
-Run the unit tests with:
-
-    npm test
-
-## Licence
+## Licensing
 
 Copyright 2013 Lovell Fuller
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
-You may obtain a copy of the License at [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
+You may obtain a copy of the License at
+[https://www.apache.org/licenses/LICENSE-2.0](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

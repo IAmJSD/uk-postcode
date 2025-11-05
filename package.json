@@ -5,11 +5,14 @@
   "description": "Parse and validate UK postcodes",
   "repository": {
     "type": "git",
-    "url": "git://github.com/lovell/uk-postcode"
+    "url": "git://github.com/lovell/uk-postcode.git"
   },
   "engines": {
-    "node": "*"
+    "node": ">=0.8"
   },
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "node test/all"
   },
@@ -17,8 +20,8 @@
     "uk",
     "postcode",
     "validation",
-	"geo"
+    "geo"
   ],
   "author": "Lovell Fuller",
-  "license": "Apache 2.0"
+  "license": "Apache-2.0"
 }
